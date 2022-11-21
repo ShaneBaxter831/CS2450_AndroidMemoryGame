@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Memory Game</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="_4">4</string>
+    <string name="_6">6</string>
+    <string name="_8">8</string>
+    <string name="_10">10</string>
+    <string name="_12">12</string>
+    <string name="_14">14</string>
+    <string name="_16">16</string>
+    <string name="_18">18</string>
+    <string name="button">20</string>
+    <string name="cards_select">How many cards would like to play with?</string>
+</resources>
