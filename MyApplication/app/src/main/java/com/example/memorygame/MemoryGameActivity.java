@@ -3,8 +3,10 @@ package com.example.memorygame;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +15,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MemoryGameActivity extends AppCompatActivity {
 
@@ -21,14 +27,22 @@ public class MemoryGameActivity extends AppCompatActivity {
     private int numCards;
     private Integer[] allPossiblePictures;
     private Card[] cardsBeingUsed;
+    private Integer[] labelList;
+    private Integer backFace;
+    private CardManager cardHolder;
+    private TimerTask task;
+    private Timer timer;
+    private Button backButton;
 
     @Override protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        numCards =  getIntent().getIntExtra("NUM_CARDS", 8);
+        numCards = getIntent().getIntExtra("NUM_CARDS", 8);
 
         if(numCards == 4)
             setContentView(R.layout.four_card_game);
+        if(numCards == 6)
+            setContentView(R.layout.six_card_game);
         if(numCards == 8)
             setContentView(R.layout.eight_card_game);
         if(numCards == 10)
@@ -45,59 +59,99 @@ public class MemoryGameActivity extends AppCompatActivity {
             setContentView(R.layout.twenty_card_game);
 
 
+        backButton = (Button)findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
+                startActivity(gameIntent);
+            }
+        });
+
+
         cardsBeingUsed = new Card[numCards];
+        labelList = new Integer[numCards];
+
+        for(int i = 0; i < numCards; i++){
+            labelList[i] = i;
+        }
+        Collections.shuffle(Arrays.asList(labelList));
 
 
-        allPossiblePictures = new Integer[40];
+        allPossiblePictures = new Integer[10];
 
         //add each picture twice
         allPossiblePictures[0] = (R.drawable.ic_baseline_bug_report_24);
-        allPossiblePictures[1] = (R.drawable.ic_baseline_bug_report_24);
-        allPossiblePictures[2] = (R.drawable.ic_baseline_cookie_24);
-        allPossiblePictures[3] = (R.drawable.ic_baseline_cookie_24);
-        allPossiblePictures[4] = (R.drawable.ic_baseline_hiking_24);
-        allPossiblePictures[5] = (R.drawable.ic_baseline_hiking_24);
-        allPossiblePictures[6] = (R.drawable.ic_baseline_pest_control_rodent_24);
-        allPossiblePictures[7] = (R.drawable.ic_baseline_pest_control_rodent_24);
-        allPossiblePictures[8] = R.drawable.ic_baseline_plumbing_24;
-        allPossiblePictures[9] = R.drawable.ic_baseline_plumbing_24;
-        allPossiblePictures[10] = R.drawable.ic_baseline_ramen_dining_24;
-        allPossiblePictures[11] = R.drawable.ic_baseline_ramen_dining_24;
-        allPossiblePictures[12] = R.drawable.ic_baseline_savings_24;
-        allPossiblePictures[13] = R.drawable.ic_baseline_savings_24;
-        allPossiblePictures[14] = R.drawable.ic_baseline_sports_esports_24;
-        allPossiblePictures[15] = R.drawable.ic_baseline_sports_esports_24;
-        allPossiblePictures[16] = R.drawable.ic_baseline_rocket_launch_24;
-        allPossiblePictures[17] = R.drawable.ic_baseline_rocket_launch_24;
-        allPossiblePictures[18] = R.drawable.ic_baseline_toys_24;
-        allPossiblePictures[19] = R.drawable.ic_baseline_toys_24;
+        allPossiblePictures[1] = (R.drawable.ic_baseline_cookie_24);
+        allPossiblePictures[2] = (R.drawable.ic_baseline_hiking_24);
+        allPossiblePictures[3] = (R.drawable.ic_baseline_pest_control_rodent_24);
+        allPossiblePictures[4] = R.drawable.ic_baseline_plumbing_24;
+        allPossiblePictures[5] = R.drawable.ic_baseline_ramen_dining_24;
+        allPossiblePictures[6] = R.drawable.ic_baseline_savings_24;
+        allPossiblePictures[7] = R.drawable.ic_baseline_sports_esports_24;
+        allPossiblePictures[8] = R.drawable.ic_baseline_rocket_launch_24;
+        allPossiblePictures[9] = R.drawable.ic_baseline_toys_24;
 
-
-        Random rand = new Random();
-
-
-
+        backFace = R.drawable.ic_baseline_tips_and_updates_24;
 
         allCardButtons = new ImageButton[]{findViewById(R.id.card1),findViewById(R.id.card2),findViewById(R.id.card3),findViewById(R.id.card4),
                                     findViewById(R.id.card5), findViewById(R.id.card6), findViewById(R.id.card7), findViewById(R.id.card8), findViewById(R.id.card9),
                                     findViewById(R.id.card10), findViewById(R.id.card11), findViewById(R.id.card12), findViewById(R.id.card13), findViewById(R.id.card14),
                                     findViewById(R.id.card15), findViewById(R.id.card16), findViewById(R.id.card17), findViewById(R.id.card18), findViewById(R.id.card19),
                                     findViewById(R.id.card20)};
-
-        for(int i = 0; i<numCards; i++) {
-
-            boolean foundValidIndex = false;
-            int index = 0;
-
-            while(!foundValidIndex){
-                index = rand.nextInt(numCards);
-                if(allPossiblePictures[index] != null)
-                    foundValidIndex = true;
-            }
-
-            cardsBeingUsed[i] = new Card(allPossiblePictures[index], allCardButtons[i]);
+        int j = 0;
+        for(int i = 0; i<numCards; i += 2) {
+            cardsBeingUsed[i] = new Card(allPossiblePictures[j], backFace, allCardButtons[labelList[i]]);
+            cardsBeingUsed[i+1] = new Card(allPossiblePictures[j], backFace, allCardButtons[labelList[i+1]]);
+            cardsBeingUsed[i].setMatchingCard(cardsBeingUsed[i+1]);
+            cardsBeingUsed[i+1].setMatchingCard(cardsBeingUsed[i+1]);
             cardsBeingUsed[i].setUpListener();
-            allPossiblePictures[index] = null;
+            cardsBeingUsed[i+1].setUpListener();
+            j++;
         }
+        cardHolder = new CardManager(cardsBeingUsed);
+        runGame(cardHolder);
     }
+
+    private void runGame(CardManager ch){
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                if(ch.numberFlipped() > 1){
+                    int[] temp = ch.cardsFlipped();
+                    if(cardsBeingUsed[temp[0]].checkMatchingCard(cardsBeingUsed[temp[1]])){
+                        cardsBeingUsed[temp[0]].disable();
+                        cardsBeingUsed[temp[1]].disable();
+                    }
+                    else{
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        cardsBeingUsed[temp[0]].flipDown();
+                        cardsBeingUsed[temp[1]].flipDown();
+                    }
+                    temp = null;
+                }
+                if(ch.numberDisabled() == numCards){
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    backButton.callOnClick();
+                }
+            }
+        };
+        timer = new Timer();
+        timer.schedule(task,1, 1);
+    }
+
+    @Override protected void onStop(){
+        super.onStop();
+        timer.cancel();
+        timer.purge();
+    }
+
 }

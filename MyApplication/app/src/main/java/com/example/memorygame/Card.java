@@ -5,30 +5,63 @@ import android.widget.ImageButton;
 
 public class Card {
 
-    public Card matchingCard;
-    public int frontPictureId;
-    public ImageButton backFaceButton;
+    private Card matchingCard;
+    private int frontPictureId;
+    private int backPictureId;
+    private ImageButton faceButton;
+    private boolean flipped;
+    public boolean disabled;
 
-    public Card(int frontId, ImageButton back){
+    public Card(int frontId, int backId, ImageButton face){
 
         this.frontPictureId = frontId;
-        this.backFaceButton = back;
-
+        this.backPictureId = backId;
+        this.faceButton = face;
+        this.flipped = false;
+        this.disabled = false;
     }
 
     public void setMatchingCard(Card match){
         this.matchingCard = match;
     }
 
+    public boolean checkMatchingCard(Card test){
+        if(test == matchingCard){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void setUpListener(){
-        if(backFaceButton == null)
+        if(faceButton == null)
             return;
-        backFaceButton.setOnClickListener(new View.OnClickListener() {
+        faceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                backFaceButton.setImageResource(frontPictureId);
+                flipUp();
             }
         });
-
     }
+
+    private void flipUp(){
+        faceButton.setImageResource(frontPictureId);
+        flipped = true;
+    }
+
+    public void flipDown(){
+        faceButton.setImageResource(backPictureId);
+        flipped = false;
+    }
+
+    public boolean isFlipped(){
+        return flipped;
+    }
+
+    public void disable(){
+        faceButton.setClickable(false);
+        disabled = true;
+    }
+
 }
