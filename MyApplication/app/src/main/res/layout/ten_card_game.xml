@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:text="back"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/black" />
+
     <ImageButton
         android:id="@+id/card9"
         android:layout_width="100dp"
