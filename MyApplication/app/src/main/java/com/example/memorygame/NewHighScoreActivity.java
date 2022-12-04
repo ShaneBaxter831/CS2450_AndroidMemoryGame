@@ -29,20 +29,16 @@ public class NewHighScoreActivity extends AppCompatActivity {
         displayScore.setText("Your Score: " + newScore);
 
         EditText nameText = findViewById(R.id.editTextTextPersonName);
-        name = nameText.getText().toString();
 
         Button doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                name = nameText.getText().toString();
+
                 SharedPreferences preferences = getSharedPreferences("PREFS", 0);
                 SharedPreferences.Editor editor = preferences.edit();
-
-                if(preferences.contains("highscore8")){
-                    editor.remove("highscore8");
-                    editor.remove("highscore8name");
-                }
 
                 editor.putInt("highscore" + numCards, newScore);
                 editor.putString("highscore" + numCards + "name", name);

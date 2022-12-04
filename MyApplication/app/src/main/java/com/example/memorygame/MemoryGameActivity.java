@@ -127,6 +127,7 @@ public class MemoryGameActivity extends AppCompatActivity {
 
     private void runGame(CardManager ch){
         task = new TimerTask() {
+            int c = 0;
             @Override
             public void run() {
                 if(ch.numberFlipped() > 1){
@@ -170,26 +171,30 @@ public class MemoryGameActivity extends AppCompatActivity {
                 }
                 //Player has correctly guessed all matches, game is over
                 if(ch.numberDisabled() == numCards){
+                    c++;
                     try {
-                        Thread.sleep(6000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     SharedPreferences preferences = getSharedPreferences("PREFS", 0);
                     int oldHighScore = preferences.getInt("highscore" + numCards, 0);
-                    if(oldHighScore < currentPlayer.getScore()){
+                    if(oldHighScore < currentPlayer.getScore() && c < 2){
                         Intent enterHighScoreIntent = new Intent(MemoryGameActivity.this, NewHighScoreActivity.class);
                         enterHighScoreIntent.putExtra("NUM_CARDS", numCards);
                         enterHighScoreIntent.putExtra("SCORE", currentPlayer.getScore());
                         startActivity(enterHighScoreIntent);
+                        System.out.print("\n\n\nTEST\n\n\n");
                     } else {
-                        backButton.callOnClick();
+                        if(c < 2){
+                            backButton.callOnClick();
+                        }
                     }
                 }
             }
         };
         timer = new Timer();
-        timer.schedule(task,1, 1);
+        timer.schedule(task,10, 10);
     }
 
     @Override protected void onStop(){

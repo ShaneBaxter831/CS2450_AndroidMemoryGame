@@ -27,6 +27,18 @@ public class HighScoreListActivity extends AppCompatActivity {
             }
         });
 
+        Button reset = findViewById(R.id.resetButton);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences prefs = getSharedPreferences("PREFS", 0);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.clear();
+                editor.apply();
+                HighScoreListActivity.this.recreate();
+            }
+        });
+
         TextView highScoreEight = findViewById(R.id.highScoreEight);
         SharedPreferences prefs = getSharedPreferences("PREFS", 0);
         int eightCardScore = prefs.getInt("highscore8", 0);
@@ -36,4 +48,5 @@ public class HighScoreListActivity extends AppCompatActivity {
 
 
     }
+
 }
