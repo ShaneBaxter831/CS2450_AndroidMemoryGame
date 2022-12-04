@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +37,8 @@ public class MemoryGameActivity extends AppCompatActivity {
     private TimerTask task;
     private Timer timer;
     private Button backButton;
+    private Player currentPlayer;
+    private TextView score;
 
     @Override protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -60,6 +66,7 @@ public class MemoryGameActivity extends AppCompatActivity {
 
 
         backButton = (Button)findViewById(R.id.backButton);
+        backButton.setText("End Game");
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +74,7 @@ public class MemoryGameActivity extends AppCompatActivity {
                 startActivity(gameIntent);
             }
         });
+
 
 
         cardsBeingUsed = new Card[numCards];
@@ -109,7 +117,11 @@ public class MemoryGameActivity extends AppCompatActivity {
             cardsBeingUsed[i+1].setUpListener();
             j++;
         }
+
+        score = (TextView) findViewById(R.id.scoreText);
+        currentPlayer = new Player(score);
         cardHolder = new CardManager(cardsBeingUsed);
+
         runGame(cardHolder);
     }
 
@@ -119,10 +131,22 @@ public class MemoryGameActivity extends AppCompatActivity {
             public void run() {
                 if(ch.numberFlipped() > 1){
                     int[] temp = ch.cardsFlipped();
+                    //right answer
                     if(cardsBeingUsed[temp[0]].checkMatchingCard(cardsBeingUsed[temp[1]])){
                         cardsBeingUsed[temp[0]].disable();
                         cardsBeingUsed[temp[1]].disable();
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                // Stuff that updates the UI
+                                currentPlayer.rightAnswer();
+                            }
+                        });
+
                     }
+                    //wrong answer
                     else{
                         try {
                             Thread.sleep(1000);
@@ -131,16 +155,36 @@ public class MemoryGameActivity extends AppCompatActivity {
                         }
                         cardsBeingUsed[temp[0]].flipDown();
                         cardsBeingUsed[temp[1]].flipDown();
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                // Stuff that updates the UI
+                                currentPlayer.wrongAnswer();
+                            }
+                        });
+
                     }
                     temp = null;
                 }
+                //Player has correctly guessed all matches, game is over
                 if(ch.numberDisabled() == numCards){
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(6000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    backButton.callOnClick();
+                    SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+                    int oldHighScore = preferences.getInt("highscore" + numCards, 0);
+                    if(oldHighScore < currentPlayer.getScore()){
+                        Intent enterHighScoreIntent = new Intent(MemoryGameActivity.this, NewHighScoreActivity.class);
+                        enterHighScoreIntent.putExtra("NUM_CARDS", numCards);
+                        enterHighScoreIntent.putExtra("SCORE", currentPlayer.getScore());
+                        startActivity(enterHighScoreIntent);
+                    } else {
+                        backButton.callOnClick();
+                    }
                 }
             }
         };

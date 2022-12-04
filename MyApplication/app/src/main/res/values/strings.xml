@@ -11,4 +11,5 @@
     <string name="_18">18</string>
     <string name="button">20</string>
     <string name="cards_select">How many cards would like to play with?</string>
+    <string name="default_name">Enter your name</string>
 </resources>

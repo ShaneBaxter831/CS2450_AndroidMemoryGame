@@ -55,6 +55,7 @@ public class Card {
         flipped = false;
     }
 
+    //checks if card is flipped face up
     public boolean isFlipped(){
         return flipped;
     }

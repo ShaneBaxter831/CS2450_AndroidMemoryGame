@@ -8,6 +8,7 @@ public class CardManager {
         this.cards = in;
     }
 
+    //returns number of cards that are flipped up and not disabled
     public int numberFlipped(){
         int c = 0;
         for(int i = 0; i < cards.length; i++){
@@ -18,6 +19,7 @@ public class CardManager {
         return c;
     }
 
+    //returns all cards that are flipped up and not disabled yet
     public int[] cardsFlipped(){
         int[] r = new int[numberFlipped()];
         int c = 0;
