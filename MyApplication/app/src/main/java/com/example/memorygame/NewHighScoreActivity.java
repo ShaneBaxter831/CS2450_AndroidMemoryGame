@@ -30,6 +30,8 @@ public class NewHighScoreActivity extends AppCompatActivity {
 
         EditText nameText = findViewById(R.id.editTextTextPersonName);
 
+        //When done button is pressed the new highscore and inputted name for the high score
+        //are saved to Shared Preferences
         Button doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override

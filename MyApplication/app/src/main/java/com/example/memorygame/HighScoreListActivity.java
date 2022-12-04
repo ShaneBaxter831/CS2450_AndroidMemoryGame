@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HighScoreListActivity extends AppCompatActivity {
 
+    TextView[] allHighScores;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -19,6 +21,7 @@ public class HighScoreListActivity extends AppCompatActivity {
 
         Button back = findViewById(R.id.backToMenu);
 
+        //back to main menu
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,6 +30,7 @@ public class HighScoreListActivity extends AppCompatActivity {
             }
         });
 
+        //resets all currently saved highscores
         Button reset = findViewById(R.id.resetButton);
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,13 +43,20 @@ public class HighScoreListActivity extends AppCompatActivity {
             }
         });
 
-        TextView highScoreEight = findViewById(R.id.highScoreEight);
-        SharedPreferences prefs = getSharedPreferences("PREFS", 0);
-        int eightCardScore = prefs.getInt("highscore8", 0);
-        String eightCardName = prefs.getString("highscore8name", "ABC");
+        allHighScores = new TextView[]{findViewById(R.id.highScoreFour), findViewById(R.id.highScoreSix), findViewById(R.id.highScoreEight),
+                                        findViewById(R.id.highScoreTen), findViewById(R.id.highScoreTwelve), findViewById(R.id.highScoreFourteen),
+                                        findViewById(R.id.highScoreSixteen), findViewById(R.id.highScoreEighteen), findViewById(R.id.highScoreTwenty)};
 
-        highScoreEight.setText("Eight card highscore: " + eightCardName + " - " + eightCardScore);
+        //Display all saved highscores
+        for(int i=0; i<9; i++){
+            int currNumberCards = 4 + (i*2);
 
+            SharedPreferences prefs = getSharedPreferences("PREFS", 0);
+            int currentHighScore = prefs.getInt("highscore" + currNumberCards, 0);
+            String currentHighScoreName = prefs.getString("highscore" + currNumberCards + "name", "ABC");
+
+            allHighScores[i].setText(currNumberCards + " card highscore: " + currentHighScoreName + " - " + currentHighScore);
+        }
 
     }
 
