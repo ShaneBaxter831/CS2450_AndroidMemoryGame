@@ -156,8 +156,8 @@
         android:id="@+id/toHighScores"
         android:layout_width="147dp"
         android:layout_height="62dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="60dp"
         android:text="High Scores"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -168,10 +168,10 @@
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.247"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/mainmenu" />
 
     <ImageView
@@ -179,7 +179,7 @@
         android:layout_width="353dp"
         android:layout_height="248dp"
         android:layout_marginStart="28dp"
-        android:layout_marginBottom="524dp"
+        android:layout_marginBottom="492dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/memorygameteamclassy" />
