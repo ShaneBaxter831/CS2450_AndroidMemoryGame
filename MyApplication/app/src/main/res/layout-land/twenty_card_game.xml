@@ -26,7 +26,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/card4"
         app:layout_constraintTop_toBottomOf="@+id/card4"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card12"
@@ -37,7 +37,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card3"
         app:layout_constraintTop_toBottomOf="@+id/card11"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card6"
@@ -48,7 +48,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card5"
         app:layout_constraintTop_toBottomOf="@+id/card3"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card11"
@@ -58,7 +58,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card2"
         app:layout_constraintTop_toTopOf="@+id/card2"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card4"
@@ -68,7 +68,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/card1"
         app:layout_constraintTop_toBottomOf="@+id/card1"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card7"
@@ -78,7 +78,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card17"
         app:layout_constraintTop_toTopOf="@+id/card17"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card9"
@@ -88,7 +88,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card19"
         app:layout_constraintTop_toTopOf="@+id/card19"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card15"
@@ -98,7 +98,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card8"
         app:layout_constraintTop_toTopOf="@+id/card8"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card8"
@@ -108,7 +108,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card18"
         app:layout_constraintTop_toTopOf="@+id/card18"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card14"
@@ -119,7 +119,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card12"
         app:layout_constraintTop_toBottomOf="@+id/card13"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card16"
@@ -130,7 +130,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card10"
         app:layout_constraintTop_toBottomOf="@+id/card14"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card18"
@@ -140,7 +140,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card14"
         app:layout_constraintTop_toTopOf="@+id/card14"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card20"
@@ -150,7 +150,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card7"
         app:layout_constraintTop_toTopOf="@+id/card7"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card19"
@@ -160,7 +160,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card16"
         app:layout_constraintTop_toTopOf="@+id/card16"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card17"
@@ -170,7 +170,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card13"
         app:layout_constraintTop_toTopOf="@+id/card13"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card13"
@@ -180,7 +180,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card11"
         app:layout_constraintTop_toTopOf="@+id/card11"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card1"
@@ -191,7 +191,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card2"
@@ -201,7 +201,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card1"
         app:layout_constraintTop_toTopOf="@+id/card1"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card3"
@@ -212,7 +212,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card4"
         app:layout_constraintTop_toBottomOf="@+id/card2"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card10"
@@ -223,7 +223,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card6"
         app:layout_constraintTop_toBottomOf="@+id/card12"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <TextView
         android:id="@+id/scoreText"

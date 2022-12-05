@@ -28,7 +28,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card2"
@@ -38,7 +38,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card1"
         app:layout_constraintTop_toTopOf="@+id/card1"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card4"
@@ -48,7 +48,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/card1"
         app:layout_constraintTop_toBottomOf="@+id/card1"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card3"
@@ -59,7 +59,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/card4"
         app:layout_constraintTop_toBottomOf="@+id/card2"
-        app:srcCompat="@drawable/ic_baseline_tips_and_updates_24" />
+        app:srcCompat="@drawable/classycard" />
 
     <TextView
         android:id="@+id/scoreText"
