@@ -7,53 +7,48 @@
     android:background="@drawable/classybackground"
     >
 
-    <TextView
-        android:id="@+id/newHighScoreTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="casual"
-        android:text="New High Score"
-        android:textColor="#D50000"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="263dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/default_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/newScore" />
 
     <TextView
         android:id="@+id/newScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:text="Your Score: 0"
         android:textColor="#FF0000"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newHighScoreTitle" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="263dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/default_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newScore" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <Button
         android:id="@+id/doneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="Done"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="249dp"
+        android:layout_height="263dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/newhighscore" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
