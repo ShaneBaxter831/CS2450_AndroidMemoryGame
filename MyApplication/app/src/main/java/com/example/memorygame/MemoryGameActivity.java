@@ -41,38 +41,40 @@ public class MemoryGameActivity extends AppCompatActivity {
     private Player currentPlayer;
     private TextView score;
 
-    @Override protected void onCreate(Bundle savedInstanceState){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         numCards = getIntent().getIntExtra("NUM_CARDS", 0);
 
-        if(numCards == 4)
+        if (numCards == 4)
             setContentView(R.layout.four_card_game);
-        if(numCards == 6)
+        if (numCards == 6)
             setContentView(R.layout.six_card_game);
-        if(numCards == 8)
+        if (numCards == 8)
             setContentView(R.layout.eight_card_game);
-        if(numCards == 10)
+        if (numCards == 10)
             setContentView(R.layout.ten_card_game);
-        if(numCards == 12)
+        if (numCards == 12)
             setContentView(R.layout.twelve_card_game);
-        if(numCards == 14)
+        if (numCards == 14)
             setContentView(R.layout.fourteen_card_game);
-        if(numCards == 16)
+        if (numCards == 16)
             setContentView(R.layout.sixteen_card_game);
-        if(numCards == 18)
+        if (numCards == 18)
             setContentView(R.layout.eighteen_card_game);
-        if(numCards == 20)
+        if (numCards == 20)
             setContentView(R.layout.twenty_card_game);
 
 
-        backButton = (Button)findViewById(R.id.backButton);
+        backButton = (Button) findViewById(R.id.backButton);
         backButton.setText("End Game");
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
-                startActivity(gameIntent);
+                onStop();
+                cardHolder.flipUpAll(); // show user corrects answers
+                delayEndGame();
             }
         });
 
@@ -88,11 +90,10 @@ public class MemoryGameActivity extends AppCompatActivity {
         });
 
 
-
         cardsBeingUsed = new Card[numCards];
         labelList = new Integer[numCards];
 
-        for(int i = 0; i < numCards; i++){
+        for (int i = 0; i < numCards; i++) {
             labelList[i] = i;
         }
         Collections.shuffle(Arrays.asList(labelList));
@@ -114,19 +115,19 @@ public class MemoryGameActivity extends AppCompatActivity {
 
         backFace = R.drawable.classycard;
 
-        allCardButtons = new ImageButton[]{findViewById(R.id.card1),findViewById(R.id.card2),findViewById(R.id.card3),findViewById(R.id.card4),
-                                    findViewById(R.id.card5), findViewById(R.id.card6), findViewById(R.id.card7), findViewById(R.id.card8), findViewById(R.id.card9),
-                                    findViewById(R.id.card10), findViewById(R.id.card11), findViewById(R.id.card12), findViewById(R.id.card13), findViewById(R.id.card14),
-                                    findViewById(R.id.card15), findViewById(R.id.card16), findViewById(R.id.card17), findViewById(R.id.card18), findViewById(R.id.card19),
-                                    findViewById(R.id.card20)};
+        allCardButtons = new ImageButton[]{findViewById(R.id.card1), findViewById(R.id.card2), findViewById(R.id.card3), findViewById(R.id.card4),
+                findViewById(R.id.card5), findViewById(R.id.card6), findViewById(R.id.card7), findViewById(R.id.card8), findViewById(R.id.card9),
+                findViewById(R.id.card10), findViewById(R.id.card11), findViewById(R.id.card12), findViewById(R.id.card13), findViewById(R.id.card14),
+                findViewById(R.id.card15), findViewById(R.id.card16), findViewById(R.id.card17), findViewById(R.id.card18), findViewById(R.id.card19),
+                findViewById(R.id.card20)};
         int j = 0;
-        for(int i = 0; i<numCards; i += 2) {
+        for (int i = 0; i < numCards; i += 2) {
             cardsBeingUsed[i] = new Card(allPossiblePictures[j], backFace, allCardButtons[labelList[i]]);
-            cardsBeingUsed[i+1] = new Card(allPossiblePictures[j], backFace, allCardButtons[labelList[i+1]]);
-            cardsBeingUsed[i].setMatchingCard(cardsBeingUsed[i+1]);
-            cardsBeingUsed[i+1].setMatchingCard(cardsBeingUsed[i+1]);
+            cardsBeingUsed[i + 1] = new Card(allPossiblePictures[j], backFace, allCardButtons[labelList[i + 1]]);
+            cardsBeingUsed[i].setMatchingCard(cardsBeingUsed[i + 1]);
+            cardsBeingUsed[i + 1].setMatchingCard(cardsBeingUsed[i + 1]);
             cardsBeingUsed[i].setUpListener();
-            cardsBeingUsed[i+1].setUpListener();
+            cardsBeingUsed[i + 1].setUpListener();
             j++;
         }
 
@@ -137,15 +138,16 @@ public class MemoryGameActivity extends AppCompatActivity {
         runGame(cardHolder);
     }
 
-    private void runGame(CardManager ch){
+    private void runGame(CardManager ch) {
         task = new TimerTask() {
             int c = 0;
+
             @Override
             public void run() {
-                if(ch.numberFlipped() > 1){
+                if (ch.numberFlipped() > 1) {
                     int[] temp = ch.cardsFlipped();
                     //right answer
-                    if(cardsBeingUsed[temp[0]].checkMatchingCard(cardsBeingUsed[temp[1]])){
+                    if (cardsBeingUsed[temp[0]].checkMatchingCard(cardsBeingUsed[temp[1]])) {
                         cardsBeingUsed[temp[0]].disable();
                         cardsBeingUsed[temp[1]].disable();
                         runOnUiThread(new Runnable() {
@@ -160,7 +162,7 @@ public class MemoryGameActivity extends AppCompatActivity {
 
                     }
                     //wrong answer
-                    else{
+                    else {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -186,7 +188,7 @@ public class MemoryGameActivity extends AppCompatActivity {
                     temp = null;
                 }
                 //Player has correctly guessed all matches, game is over
-                if(ch.numberDisabled() == numCards){
+                if (ch.numberDisabled() == numCards) {
                     c++;
                     try {
                         Thread.sleep(1000);
@@ -195,14 +197,14 @@ public class MemoryGameActivity extends AppCompatActivity {
                     }
                     SharedPreferences preferences = getSharedPreferences("PREFS", 0);
                     int oldHighScore = preferences.getInt("highscore" + numCards, 0);
-                    if(oldHighScore < currentPlayer.getScore() && c < 2){
+                    if (oldHighScore < currentPlayer.getScore() && c < 2) {
                         Intent enterHighScoreIntent = new Intent(MemoryGameActivity.this, NewHighScoreActivity.class);
                         enterHighScoreIntent.putExtra("NUM_CARDS", numCards);
                         enterHighScoreIntent.putExtra("SCORE", currentPlayer.getScore());
                         startActivity(enterHighScoreIntent);
                         System.out.print("\n\n\nTEST\n\n\n");
                     } else {
-                        if(c < 2){
+                        if (c < 2) {
                             backButton.callOnClick();
                         }
                     }
@@ -210,13 +212,27 @@ public class MemoryGameActivity extends AppCompatActivity {
             }
         };
         timer = new Timer();
-        timer.schedule(task,10, 10);
+        timer.schedule(task, 10, 10);
     }
 
-    @Override protected void onStop(){
+    @Override
+    protected void onStop() {
         super.onStop();
         timer.cancel();
         timer.purge();
     }
 
+    //delays returning to Main Menu so we can see answers
+    public void delayEndGame() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
+                startActivity(gameIntent);
+            }
+        };
+        Timer timer = new Timer();
+        long delay = 2000;
+        timer.schedule(task, delay);
+    }
 }
+
