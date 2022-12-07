@@ -196,7 +196,7 @@ public class MemoryGameActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     SharedPreferences preferences = getSharedPreferences("PREFS", 0);
-                    int oldHighScore = preferences.getInt("highscore" + numCards, 0);
+                    int oldHighScore = preferences.getInt("high score" + numCards, 0);
                     if (oldHighScore < currentPlayer.getScore() && c < 2) {
                         Intent enterHighScoreIntent = new Intent(MemoryGameActivity.this, NewHighScoreActivity.class);
                         enterHighScoreIntent.putExtra("NUM_CARDS", numCards);

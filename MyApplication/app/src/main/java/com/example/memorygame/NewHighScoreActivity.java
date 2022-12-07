@@ -30,7 +30,7 @@ public class NewHighScoreActivity extends AppCompatActivity {
 
         EditText nameText = findViewById(R.id.editTextTextPersonName);
 
-        //When done button is pressed the new highscore and inputted name for the high score
+        //When done button is pressed the new high score and inputted name for the high score
         //are saved to Shared Preferences
         Button doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +42,8 @@ public class NewHighScoreActivity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("PREFS", 0);
                 SharedPreferences.Editor editor = preferences.edit();
 
-                editor.putInt("highscore" + numCards, newScore);
-                editor.putString("highscore" + numCards + "name", name);
+                editor.putInt("high score" + numCards, newScore);
+                editor.putString("high score" + numCards + "name", name);
                 editor.apply();
 
                 Intent mainMenuIntent = new Intent(NewHighScoreActivity.this, MainActivity.class);

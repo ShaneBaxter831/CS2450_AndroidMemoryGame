@@ -52,10 +52,10 @@ public class HighScoreListActivity extends AppCompatActivity {
             int currNumberCards = 4 + (i*2);
 
             SharedPreferences prefs = getSharedPreferences("PREFS", 0);
-            int currentHighScore = prefs.getInt("highscore" + currNumberCards, 0);
-            String currentHighScoreName = prefs.getString("highscore" + currNumberCards + "name", "ABC");
+            int currentHighScore = prefs.getInt("high score" + currNumberCards, 0);
+            String currentHighScoreName = prefs.getString("high score" + currNumberCards + "name", "ABC");
 
-            allHighScores[i].setText(currNumberCards + " card highscore: " + currentHighScoreName + " - " + currentHighScore);
+            allHighScores[i].setText(currNumberCards + " card high score: " + currentHighScoreName + " - " + currentHighScore);
         }
 
     }
