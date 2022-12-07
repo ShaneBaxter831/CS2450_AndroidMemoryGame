@@ -8,6 +8,14 @@ public class CardManager {
         this.cards = in;
     }
 
+
+    //flips up all the cards
+    public void flipUpAll(){
+        for(int i = 0; i < cards.length; i++){
+                cards[i].flipUp();
+        }
+    }
+
     //returns number of cards that are flipped up and not disabled
     public int numberFlipped(){
         int c = 0;

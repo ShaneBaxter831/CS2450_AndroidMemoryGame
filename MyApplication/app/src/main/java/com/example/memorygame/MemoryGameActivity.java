@@ -70,6 +70,7 @@ public class MemoryGameActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardHolder.flipUpAll();
                 Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
                 startActivity(gameIntent);
             }

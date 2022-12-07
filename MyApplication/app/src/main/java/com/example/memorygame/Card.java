@@ -45,7 +45,7 @@ public class Card {
         });
     }
 
-    private void flipUp(){
+    public void flipUp(){
         faceButton.setImageResource(frontPictureId);
         flipped = true;
     }
