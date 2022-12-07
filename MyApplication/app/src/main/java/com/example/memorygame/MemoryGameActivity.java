@@ -44,7 +44,7 @@ public class MemoryGameActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        numCards = getIntent().getIntExtra("NUM_CARDS", 8);
+        numCards = getIntent().getIntExtra("NUM_CARDS", 0);
 
         if(numCards == 4)
             setContentView(R.layout.four_card_game);
@@ -82,6 +82,7 @@ public class MemoryGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent gameIntent = new Intent(MemoryGameActivity.this, MemoryGameActivity.class);
+                gameIntent.putExtra("NUM_CARDS", numCards);
                 startActivity(gameIntent);
             }
         });
