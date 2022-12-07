@@ -37,6 +37,7 @@ public class MemoryGameActivity extends AppCompatActivity {
     private TimerTask task;
     private Timer timer;
     private Button backButton;
+    private Button tryagainButton;
     private Player currentPlayer;
     private TextView score;
 
@@ -71,6 +72,16 @@ public class MemoryGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
+                startActivity(gameIntent);
+            }
+        });
+
+        tryagainButton = (Button)findViewById(R.id.tryAgainButton);
+        tryagainButton.setText("Try Again");
+        tryagainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gameIntent = new Intent(MemoryGameActivity.this, MemoryGameActivity.class);
                 startActivity(gameIntent);
             }
         });
