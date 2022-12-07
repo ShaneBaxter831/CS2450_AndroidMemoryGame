@@ -168,7 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="124dp"
         android:padding="10dp"
         app:constraint_referenced_ids="card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16,card17,card18"
         app:flow_horizontalStyle="spread"
