@@ -4,16 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    static MediaPlayer player;
+    Button musicToggle;
+    Boolean musicToggleBool = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        musicToggle = (Button)findViewById(R.id.MusicToggle);
+
+        if(player==null)
+        {
+            player = MediaPlayer.create(this, R.raw.song);
+            player.start();
+            player.setLooping(true);
+        }
 
         Button fourButton = (Button)findViewById(R.id.fourCards);
         Button sixButton = (Button)findViewById(R.id.sixCards);
@@ -24,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         Button sixteenButton = (Button)findViewById(R.id.sixteenCards);
         Button eighteenButton = (Button)findViewById(R.id.eighteenCards);
         Button twentyButton = (Button)findViewById(R.id.twentyCards);
-
 
         fourButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +135,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void musicToggle_function(View v)
+    {
+        musicToggleBool = !musicToggleBool;
+
+        if(musicToggleBool==true)
+        {
+            player.start();
+            musicToggle.setText("Music: On");
+        }else{
+            player.pause();
+            musicToggle.setText("Music: Off");
+        }
     }
 
 }

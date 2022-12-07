@@ -177,4 +177,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/memorygameteamclassy" />
 
+    <Button
+        android:id="@+id/MusicToggle"
+        android:layout_width="98dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Music: on"
+        android:textSize="8sp"
+        android:onClick="musicToggle_function"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
