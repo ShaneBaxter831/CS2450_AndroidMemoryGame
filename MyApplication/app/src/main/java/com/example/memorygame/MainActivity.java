@@ -28,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
             player.setLooping(true);
         }
 
+        if(player.isPlaying()==true)
+        {
+            musicToggle.setText("Music: On");
+            musicToggleBool = true;
+        }else{
+            musicToggle.setText("Music: Off");
+            musicToggleBool = false;
+        }
+
         Button fourButton = (Button)findViewById(R.id.fourCards);
         Button sixButton = (Button)findViewById(R.id.sixCards);
         Button eightCardButton = (Button)findViewById(R.id.eightCards);
