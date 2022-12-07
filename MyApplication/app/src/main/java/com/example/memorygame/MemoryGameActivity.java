@@ -100,7 +100,7 @@ public class MemoryGameActivity extends AppCompatActivity {
         allPossiblePictures[8] = R.drawable.ic_baseline_rocket_launch_24;
         allPossiblePictures[9] = R.drawable.ic_baseline_toys_24;
 
-        backFace = R.drawable.ic_baseline_tips_and_updates_24;
+        backFace = R.drawable.classycard;
 
         allCardButtons = new ImageButton[]{findViewById(R.id.card1),findViewById(R.id.card2),findViewById(R.id.card3),findViewById(R.id.card4),
                                     findViewById(R.id.card5), findViewById(R.id.card6), findViewById(R.id.card7), findViewById(R.id.card8), findViewById(R.id.card9),
@@ -154,14 +154,18 @@ public class MemoryGameActivity extends AppCompatActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        cardsBeingUsed[temp[0]].flipDown();
-                        cardsBeingUsed[temp[1]].flipDown();
+
+                        final int indexOne = temp[0];
+                        final int indexTwo = temp[1];
+
                         runOnUiThread(new Runnable() {
 
                             @Override
                             public void run() {
 
                                 // Stuff that updates the UI
+                                cardsBeingUsed[indexOne].flipDown();
+                                cardsBeingUsed[indexTwo].flipDown();
                                 currentPlayer.wrongAnswer();
                             }
                         });
