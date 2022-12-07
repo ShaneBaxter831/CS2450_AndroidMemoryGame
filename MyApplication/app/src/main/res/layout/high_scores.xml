@@ -130,9 +130,9 @@
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="776dp"
-        android:layout_marginTop="4dp"
-        android:text="reset"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="6dp"
+        android:text="Reset"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -9,13 +9,11 @@
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_width="120dp"
+        android:layout_height="36dp"
         android:backgroundTint="@color/black"
         android:clickable="true"
-        android:text="back"
+        android:text="End Game"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,84 +21,56 @@
         android:id="@+id/card1"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="68dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card2"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toEndOf="@+id/card1"
-        app:layout_constraintTop_toTopOf="@+id/card1"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card4"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="@+id/card1"
-        app:layout_constraintTop_toBottomOf="@+id/card1"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card7"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="@+id/card5"
-        app:layout_constraintTop_toBottomOf="@+id/card5"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card3"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toEndOf="@+id/card4"
-        app:layout_constraintTop_toBottomOf="@+id/card2"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card6"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toEndOf="@+id/card5"
-        app:layout_constraintTop_toBottomOf="@+id/card3"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card8"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toEndOf="@+id/card7"
-        app:layout_constraintTop_toBottomOf="@+id/card6"
         app:srcCompat="@drawable/classycard" />
 
     <ImageButton
         android:id="@+id/card5"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="@+id/card4"
-        app:layout_constraintTop_toBottomOf="@+id/card4"
         app:srcCompat="@drawable/classycard" />
 
     <TextView
@@ -112,15 +82,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/tryAgainButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:padding="10dp"
+        app:constraint_referenced_ids="card1,card2,card3,card4,card5,card6,card7,card8"
+        app:flow_horizontalStyle="spread"
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="chain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
