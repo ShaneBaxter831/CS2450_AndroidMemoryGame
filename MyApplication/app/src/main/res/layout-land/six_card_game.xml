@@ -7,7 +7,7 @@
     android:background="@drawable/classybackground_land">
 
     <Button
-        android:id="@+id/tryAgainButton9"
+        android:id="@+id/tryAgainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="268dp"

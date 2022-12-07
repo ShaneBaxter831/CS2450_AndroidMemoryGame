@@ -83,14 +83,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
+        android:layout_marginTop="144dp"
         android:padding="10dp"
         app:constraint_referenced_ids="card1,card2,card3,card4,card5,card6"
         app:flow_horizontalStyle="spread"
         app:flow_verticalStyle="spread"
         app:flow_wrapMode="chain"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
