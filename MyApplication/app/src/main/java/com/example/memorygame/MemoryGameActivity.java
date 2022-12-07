@@ -72,9 +72,8 @@ public class MemoryGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onStop();
-                cardHolder.flipUpAll(); //show the correct answers
-                Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
-                startActivity(gameIntent);
+                cardHolder.flipUpAll(); // show user corrects answers
+                delayEndGame();
             }
         });
 
@@ -211,4 +210,17 @@ public class MemoryGameActivity extends AppCompatActivity {
         timer.purge();
     }
 
+    //delays returning to Main Menu so we can see answers
+    public void delayEndGame() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
+                startActivity(gameIntent);
+            }
+        };
+        Timer timer = new Timer();
+        long delay = 2000;
+        timer.schedule(task, delay);
+    }
 }
+
