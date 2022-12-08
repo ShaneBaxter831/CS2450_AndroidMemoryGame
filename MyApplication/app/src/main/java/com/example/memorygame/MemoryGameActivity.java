@@ -49,6 +49,7 @@ public class MemoryGameActivity extends AppCompatActivity {
 
         ActionBar actionBar = getActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
 
         numCards = getIntent().getIntExtra("NUM_CARDS", 0);
