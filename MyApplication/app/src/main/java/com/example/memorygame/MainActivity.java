@@ -146,6 +146,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        player.release();
+        super.onDestroy();
+    }
+
     public void musicToggle_function(View v)
     {
         musicToggleBool = !musicToggleBool;

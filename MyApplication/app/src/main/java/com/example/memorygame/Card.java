@@ -65,4 +65,9 @@ public class Card {
         disabled = true;
     }
 
+    public void enable(){
+        faceButton.setClickable(true);
+        disabled = false;
+    }
+
 }

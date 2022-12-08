@@ -36,4 +36,9 @@ public class Player {
         score = score +2 ;
         scoreText.setText("Score: " + score);
     }
+
+    public void resetScore(){
+        score = 0;
+        scoreText.setText("Score: " + score);
+    }
 }

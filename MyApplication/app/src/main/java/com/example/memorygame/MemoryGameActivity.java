@@ -26,6 +26,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 public class MemoryGameActivity extends AppCompatActivity {
 
@@ -79,7 +81,14 @@ public class MemoryGameActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onStop();
+                task.cancel();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Stuff that updates the UI
+                        currentPlayer.resetScore();
+                    }
+                });
                 cardHolder.flipUpAll(); // show user corrects answers
                 delayEndGame();
             }
@@ -147,86 +156,92 @@ public class MemoryGameActivity extends AppCompatActivity {
 
     private void runGame(CardManager ch) {
         task = new TimerTask() {
-            int c = 0;
+            int s1 = 0;
+            int s2 = 0;
 
             @Override
             public void run() {
-                if (ch.numberFlipped() > 1) {
+                if (ch.numberFlipped() > 1 && s1 < 1) {
+                    s1++;
                     int[] temp = ch.cardsFlipped();
                     //right answer
                     if (cardsBeingUsed[temp[0]].checkMatchingCard(cardsBeingUsed[temp[1]])) {
                         cardsBeingUsed[temp[0]].disable();
                         cardsBeingUsed[temp[1]].disable();
                         runOnUiThread(new Runnable() {
-
                             @Override
                             public void run() {
-
                                 // Stuff that updates the UI
                                 currentPlayer.rightAnswer();
                             }
                         });
-
                     }
                     //wrong answer
                     else {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        final int indexOne = temp[0];
-                        final int indexTwo = temp[1];
-
+                        disableNotFlipped();
+                        int indexOne = temp[0];
+                        int indexTwo = temp[1];
+                        LockSupport.parkNanos(800000000);
+                        enableNotFlipped();
+                        LockSupport.parkNanos(200000000);
                         runOnUiThread(new Runnable() {
-
                             @Override
                             public void run() {
-
                                 // Stuff that updates the UI
+                                currentPlayer.wrongAnswer();
                                 cardsBeingUsed[indexOne].flipDown();
                                 cardsBeingUsed[indexTwo].flipDown();
-                                currentPlayer.wrongAnswer();
                             }
                         });
-
                     }
                     temp = null;
+                    s1--;
                 }
                 //Player has correctly guessed all matches, game is over
-                if (ch.numberDisabled() == numCards) {
-                    c++;
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                if (ch.numberDisabled() == numCards && s2 < 1) {
+                    s2++;
+                    LockSupport.parkNanos(1_000_000_000);
                     SharedPreferences preferences = getSharedPreferences("PREFS", 0);
                     int oldHighScore = preferences.getInt("high score" + numCards, 0);
-                    if (oldHighScore < currentPlayer.getScore() && c < 2) {
+                    if (oldHighScore < currentPlayer.getScore()) {
                         Intent enterHighScoreIntent = new Intent(MemoryGameActivity.this, NewHighScoreActivity.class);
                         enterHighScoreIntent.putExtra("NUM_CARDS", numCards);
                         enterHighScoreIntent.putExtra("SCORE", currentPlayer.getScore());
                         startActivity(enterHighScoreIntent);
-                        System.out.print("\n\n\nTEST\n\n\n");
                     } else {
-                        if (c < 2) {
-                            backButton.callOnClick();
-                        }
+                        endGame();
                     }
+                    timer.cancel();
+                    s2--;
                 }
             }
         };
+
         timer = new Timer();
-        timer.schedule(task, 10, 10);
+        timer.schedule(task, 100, 100);
+    }
+
+    private void disableNotFlipped(){
+        for(int i = 0; i < cardsBeingUsed.length; ++i){
+            if(!cardsBeingUsed[i].isFlipped()){
+                cardsBeingUsed[i].disable();
+            }
+        }
+    }
+
+    private void enableNotFlipped(){
+        for(int i = 0; i < cardsBeingUsed.length; ++i){
+            if(!cardsBeingUsed[i].isFlipped()){
+                cardsBeingUsed[i].enable();
+            }
+        }
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         timer.cancel();
         timer.purge();
+        super.onStop();
     }
 
     //delays returning to Main Menu so we can see answers
@@ -240,6 +255,12 @@ public class MemoryGameActivity extends AppCompatActivity {
         Timer timer = new Timer();
         long delay = 2000;
         timer.schedule(task, delay);
+    }
+
+    //ends game
+    public void endGame() {
+        Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
+        startActivity(gameIntent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
