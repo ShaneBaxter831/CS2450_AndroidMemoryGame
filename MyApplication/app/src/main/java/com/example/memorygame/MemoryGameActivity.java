@@ -3,6 +3,7 @@ package com.example.memorygame;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.media.Image;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,8 +43,12 @@ public class MemoryGameActivity extends AppCompatActivity {
     private Player currentPlayer;
     private TextView score;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        ActionBar actionBar = getActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
 
         numCards = getIntent().getIntExtra("NUM_CARDS", 0);
@@ -233,6 +239,12 @@ public class MemoryGameActivity extends AppCompatActivity {
         Timer timer = new Timer();
         long delay = 2000;
         timer.schedule(task, delay);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 }
 
