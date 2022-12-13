@@ -1,3 +1,19 @@
+/***********************************************************
+ * file: NewHighScoreActivity.java
+ * author: Marvin, Shane
+ * class: CS 2450
+ *
+ * Assignment: Android App
+ * Date last modified: 12/12/2022
+ *
+ * Purpose: This activity is prompted when the user gets a new
+ * high score in their chosen Memory Game, allowing them to store
+ * their name with their high score into a file.
+ *
+ ***********************************************************/
+
+
+
 package com.example.memorygame;
 
 import android.content.Intent;
@@ -16,6 +32,14 @@ public class NewHighScoreActivity extends AppCompatActivity {
     private String name;
     private int numCards;
 
+
+    /** onCreate
+     * purpose: Overridden onCreate that sets up the activity
+     * and prompt that asks for the name for the new high
+     * score. Stores the high score and name into the shared preferences.
+     *
+     * @param savedInstanceState Bundle for the instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
