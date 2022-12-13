@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class Player {
 
-    private int score;
+    private double score;
     private String name;
     public TextView scoreText;
 
@@ -38,7 +38,7 @@ public class Player {
         score = 0;
         name = "";
         scoreText = text;
-        scoreText.setText("Score: " + score);
+        scoreText.setText("Score: " + (int)score);
 
     }
 
@@ -57,8 +57,9 @@ public class Player {
      *
      * @return An int that represents the score of the player.
      */
-    public int getScore(){
-        return this.score;
+    public double getScore(){
+        int temp = (int)score;
+        return temp;
     }
 
 
@@ -70,8 +71,8 @@ public class Player {
      */
     public void wrongAnswer(){
         if(score > 0)
-            score = score - 1;
-        scoreText.setText("Score: " + score);
+            score = score - .5;
+        scoreText.setText("Score: " + (int)score);
     }
 
 
@@ -81,8 +82,8 @@ public class Player {
      *
      */
     public void rightAnswer(){
-        score = score +2 ;
-        scoreText.setText("Score: " + score);
+        score = score + 2 ;
+        scoreText.setText("Score: " + (int)score);
     }
 
 
@@ -93,6 +94,6 @@ public class Player {
      */
     public void resetScore(){
         score = 0;
-        scoreText.setText("Score: " + score);
+        scoreText.setText("Score: " + (int)score);
     }
 }
