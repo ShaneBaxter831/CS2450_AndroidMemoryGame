@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/MusicToggle"
         android:layout_width="98dp"
-        android:layout_height="50dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="36dp"
         android:onClick="musicToggle_function"
         android:text="Music: on"

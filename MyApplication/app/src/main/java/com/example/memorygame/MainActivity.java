@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             player.setLooping(true);
         }
 
-        if(player.isPlaying())
+        if(player.isPlaying()==true)
         {
             musicToggle.setText("Music: On");
             musicToggleBool = true;
@@ -148,8 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        player.reset();
-        player = null;
+        player.release();
         super.onDestroy();
     }
 
