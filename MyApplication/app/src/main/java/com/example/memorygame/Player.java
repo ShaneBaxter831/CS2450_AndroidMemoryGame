@@ -57,7 +57,7 @@ public class Player {
      *
      * @return An int that represents the score of the player.
      */
-    public double getScore(){
+    public int getScore(){
         int temp = (int)score;
         return temp;
     }
