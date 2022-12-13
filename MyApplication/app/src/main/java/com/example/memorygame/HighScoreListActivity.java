@@ -1,20 +1,3 @@
-/***********************************************************
- * file: HighScoreListActivity.java
- * author:
- * class: CS 2450
- *
- * Assignment: Android App
- * Date last modified: 12/12/2022
- *
- * Purpose: This activity displays the high scores of each
- * of the number of tile options for the memory game to the
- * user. There is also a button to reset all the
- * high scores.
- *
- ***********************************************************/
-
-
-
 package com.example.memorygame;
 
 import android.content.Intent;
@@ -30,14 +13,6 @@ public class HighScoreListActivity extends AppCompatActivity {
 
     TextView[] allHighScores;
 
-    /** onCreate
-     * purpose: overridden onCreate utilized to set up the list
-     * of high scores on the screen, as well as the ancestral navigation
-     * button back to the MainActivity. The scores are found through the
-     * preferences of the application.
-     *
-     * @param savedInstanceState Bundle of the instance state.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

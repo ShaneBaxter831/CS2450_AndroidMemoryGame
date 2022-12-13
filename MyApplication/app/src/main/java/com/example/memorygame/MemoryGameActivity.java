@@ -1,22 +1,3 @@
-/***********************************************************
- * file: MemoryGameActivity.java
- * author: Ethan, Shane
- * class: CS 2450
- *
- * Assignment: Android App
- * Date last modified: 12/12/2022
- *
- * Purpose: This activity sets up the functionality and UI
- * for the memory game. It utilizes the specilty classes
- * for the cards and the game selection from the MainActivity
- * class to display the correct game, as well as initiate the prompt
- * to store the final score if it greater than the high score
- * set in the preferences.
- *
- ***********************************************************/
-
-
-
 package com.example.memorygame;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,13 +46,6 @@ public class MemoryGameActivity extends AppCompatActivity {
     private TextView score;
 
 
-    /** onCreate
-     * Purpose: Overridden onCreate method used to set up the UI
-     * of the correct memory game as passed in from the MainActivity.
-     *
-     * @param savedInstanceState The bundle of the instance state at
-     *                           creation.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -180,18 +154,6 @@ public class MemoryGameActivity extends AppCompatActivity {
         runGame(cardHolder);
     }
 
-
-    /** runGame
-     * Puspose: Sets up a timer based game sequence that
-     * automatically checks if flipped pairs are matched,
-     * and if not, reflips them. Also checks if, after
-     * the game finished, the score is the new
-     * high score.
-     *
-     * @param ch The CardManager of the correct type of
-     *           memory game being played, storing all the
-     *           cards being used.
-     */
     private void runGame(CardManager ch) {
         task = new TimerTask() {
             int s1 = 0;
@@ -259,12 +221,6 @@ public class MemoryGameActivity extends AppCompatActivity {
         timer.schedule(task, 100, 100);
     }
 
-
-    /** disableNotFlipped
-     * Purpose: Disables the cards' listener and ability
-     * to be flipped if they are not flipped yet.
-     *
-     */
     private void disableNotFlipped(){
         for(int i = 0; i < cardsBeingUsed.length; ++i){
             if(!cardsBeingUsed[i].isFlipped()){
@@ -273,12 +229,6 @@ public class MemoryGameActivity extends AppCompatActivity {
         }
     }
 
-
-    /** enableNotFlipped
-     * Purpose: Enables the cards that are not flipped
-     * yet to be selected/flipped.
-     *
-     */
     private void enableNotFlipped(){
         for(int i = 0; i < cardsBeingUsed.length; ++i){
             if(!cardsBeingUsed[i].isFlipped()){
@@ -287,12 +237,6 @@ public class MemoryGameActivity extends AppCompatActivity {
         }
     }
 
-
-    /** onStop
-     * Purpose: Overridden method used to stop the timer
-     * used in the memory game, then calls original onStop.
-     *
-     */
     @Override
     protected void onStop() {
         timer.cancel();
@@ -300,10 +244,7 @@ public class MemoryGameActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    /** delayEndGame
-     * purpose: delays returning to Main Menu so we can see answers
-     *
-     */
+    //delays returning to Main Menu so we can see answers
     public void delayEndGame() {
         TimerTask task = new TimerTask() {
             public void run() {
@@ -316,21 +257,12 @@ public class MemoryGameActivity extends AppCompatActivity {
         timer.schedule(task, delay);
     }
 
-    /** endGame
-     * Purpose: ends the game, going back to the MainActivity.
-     *
-     */
+    //ends game
     public void endGame() {
         Intent gameIntent = new Intent(MemoryGameActivity.this, MainActivity.class);
         startActivity(gameIntent);
     }
 
-
-    /** onOptionsItemSelected
-     * purpose: Sets up ancestral naviation using up button
-     *
-     * @return True, for the ancestral navivation
-     */
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivityForResult(myIntent, 0);

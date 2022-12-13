@@ -1,18 +1,3 @@
-/***********************************************************
- * file: MainActivity.java
- * author: Ethan, Marvin, Shane, Simon
- * class: CS 2450
- *
- * Assignment: Android App
- * Date last modified: 12/12/2022
- *
- * Purpose: This Activity sets up the UI for the main menu of
- * the android application, as well as the media player and
- * buttons for the various games.
- *
- ***********************************************************/
-
-
 package com.example.memorygame;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,16 +14,6 @@ public class MainActivity extends AppCompatActivity {
     Button musicToggle;
     Boolean musicToggleBool = true;
 
-
-    /** onCreate
-     * purpose: overridden onCreate method that sets up the
-     * main menu button options for the different memory games,
-     * their listeners, and the media player for the music.
-     * There is also a button set up to navigate to the
-     * high scores activity.
-     *
-     * @param savedInstanceState A bundle for the instance state.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             player.setLooping(true);
         }
 
-        if(player.isPlaying()==true)
+        if(player.isPlaying())
         {
             musicToggle.setText("Music: On");
             musicToggleBool = true;
@@ -171,24 +146,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    /** onDestroy
-     * purpose: overridden onDestroy method that is modified
-     * to release the media player when destorying the activity.
-     *
-     */
     @Override
     public void onDestroy() {
-        player.release();
+        player.reset();
+        player = null;
         super.onDestroy();
     }
 
-
-    /** musicToggle_function
-     * purpose: toggles the music player on or off
-     * and changes the button's text accordingly
-     *
-     * */
     public void musicToggle_function(View v)
     {
         musicToggleBool = !musicToggleBool;
