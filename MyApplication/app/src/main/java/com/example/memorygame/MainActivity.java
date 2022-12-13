@@ -148,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        player.release();
         super.onDestroy();
     }
 
